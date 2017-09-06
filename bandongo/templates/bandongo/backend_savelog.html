@@ -4,6 +4,15 @@
 {% block content %}
 <div class="container">
     <div><h1>Recently Savelogs</h1></div>
+    <div>
+        {% for index in pages %}
+            {% if index == curPage%}
+                 <a class="btn btn-default btn-xs active" role="button" style="cursor: default;">{{index}}</a>
+            {% else %}
+                <a class="btn btn-default btn-xs" href="/backend/notificationPage/{{index}}/" role="button">{{index}}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
     <table class="table">
         <thead>
             <tr>
@@ -26,5 +35,14 @@
             {% endfor %}
         </tbody>
     </table>
+    <div>
+        {% for index in pages %}
+            {% if index == curPage%}
+                 <a class="btn btn-default btn-xs active" role="button" style="cursor: default;">{{index}}</a>
+            {% else %}
+                <a class="btn btn-default btn-xs" href="/backend/notificationPage/{{index}}/" role="button">{{index}}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

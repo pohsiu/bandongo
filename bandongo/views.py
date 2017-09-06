@@ -769,10 +769,22 @@ def wishPage(request):
     return render(request, 'bandongo/backend_wish.html',{'foods': foodCount, 'drinks': drinkCount})
 
 @login_required(login_url='/backend/login/')
-def savelogPage(request):
-    savelogs=Savelog.objects.order_by('-id')[:10]
+def savelogPage(request, page):
+    savelogs=Savelog.objects.order_by('-id')
     
-    return render(request, 'bandongo/backend_savelog.html',{'logs': savelogs})
+    rowNum=100
+    
+    page=int(page)
+    pages=[]
+    for i in range(len(savelogs)/rowNum+1):
+        pages.append(i+1)
+    if page*rowNum-rowNum>len(savelogs):
+        print "page error"
+    elif page*rowNum>len(savelogs) and len(savelogs)>page*rowNum-rowNum:
+        return render(request, 'bandongo/backend_savelog.html',{'logs': savelogs[page*rowNum-rowNum:], 'pages': pages, 'curPage': page})
+    else:
+        return render(request, 'bandongo/backend_savelog.html',{'logs': savelogs[page*rowNum-rowNum:page*rowNum], 'pages': pages, 'curPage': page})
+    
 
 @login_required(login_url='/backend/login/')
 def addDepartmentPage(request):

@@ -89,7 +89,7 @@ urlpatterns = [
     url(r'^backend/messagePage/$', views.messagePage),
     url(r'^backend/instantMessage/$', views.instantMsg),
     url(r'^backend/wishPage/$', views.wishPage),
-    url(r'^backend/savelogPage/$', views.savelogPage),
+    url(r'^backend/savelogPage/([0-9]+)/$', views.savelogPage),
     url(r'^backend/addDepartmentPage/$', views.addDepartmentPage),
     url(r'^backend/departmentListPage/$', views.departmentListPage),
     url(r'^backend/department/([0-9]+)/$', views.editDepartmentPage),
