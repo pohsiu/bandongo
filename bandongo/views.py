@@ -172,8 +172,19 @@ def check_order(request):
     member_id = request.POST['member_id']
     foodorders = FoodOrder.objects.filter(scheduleName__id=schedule_id,memberName__id=member_id)
     drinkorders = DrinkOrder.objects.filter(scheduleName__id=schedule_id,memberName__id=member_id)
-    savings = Member.objects.get(id=member_id).saving
-    if savings < -500:
+    object_member = Member.objects.get(id=member_id)
+    savings = object_member.saving
+    category = object_member.remark.name.encode('utf8')
+    
+    # print type(category)
+    if member_id == '42' and savings < 0 :
+        # print '1'
+        return HttpResponse("insufficient")
+    if category != '替代役' and savings < 0:
+        # print '2'
+        return HttpResponse("insufficient")
+    if category == '替代役' and savings < -500:
+        # print '3'
         return HttpResponse("insufficient")
     if foodorders.exists() and (drinkorders.exists()):
         return HttpResponse("both")
@@ -183,7 +194,7 @@ def check_order(request):
         return HttpResponse("food")
     if (not foodorders.exists()) and (not drinkorders.exists()):
         return HttpResponse("nothing")
-
+        
 def add_order(request):
     checkExpire()
     foodJson=json.loads(request.POST["foodJson"])
