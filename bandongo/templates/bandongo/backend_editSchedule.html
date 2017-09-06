@@ -28,7 +28,7 @@
                         </select>
                     </td>
                     <td>
-                        <select id="catalog" class="selectpicker" data-width="fit" multiple>
+                        <select id="catalog" class="selectpicker" data-width="fit" data-selected-text-format="count>5" multiple>
                             {% for catalog in catalogs %}
                                 <option value="{{catalog.id}}" {{catalog.selected}}>{{catalog.name}}</option>
                             {% endfor %}
