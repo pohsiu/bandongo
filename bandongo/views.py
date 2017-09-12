@@ -28,10 +28,7 @@ from django.core.files.base import ContentFile
 from django.db.models import Q
 import os
 import json
-# import numpy as np
-# import jieba
-# import sys
-# from gensim.models.doc2vec import Doc2Vec
+
 
 
 from linebot import LineBotApi
@@ -40,21 +37,7 @@ from linebot.exceptions import LineBotApiError
 
 
 
-# reload(sys)
-# sys.setdefaultencoding('utf-8')
-# jieba.initialize()
-# jieba.set_dictionary('bandongo/dict.txt.big')
-# model = Doc2Vec.load('bandongo/womentalk_contents.doc2vec.model2')
 
-
-# with open('bandongo/selected_ptt_comments_seg', 'r') as myf:
-#     sentbank = myf.readlines()
-# for i in range(len(sentbank)):                                                                                                                      
-#     sentbank[i] = sentbank[i].replace('\n', ' ').split()
-# with open('bandongo/selected_ptt_comments', 'r') as myf:
-#     ansbank = myf.readlines()
-# for i in range(len(sentbank)):                                                                                                                      
-#     ansbank[i] = ansbank[i].replace('\n', ' ')
 
 
     
@@ -115,27 +98,7 @@ def index_v2(request):
     return render(request, 'bandongo/frontend_index_v2.html',{'s_latest':s_latest,'mark_list':mark_list,'home_message':home_message,'empty':empty,'drinks':drinks,'foods':foods})
 
 
-def bot_reply(real_input):
-    #max = 0
-    answer = ""
-    score_lst = []
-    for i in range(len(sentbank)):
-        sent = filter(lambda x: x in model.wv.vocab, sentbank[i])
-        if len(sent)==0:
-            #continue
-            score_lst.append(0.0)
-        else:
-            #score = model.n_similarity(sent,real_input)
-            score_lst.append(model.n_similarity(sent,real_input))
-        #if score >= max:
-        #    max = score
-        #    answer = ansbank[i]
-    pair = zip(score_lst, ansbank)
-    pair.sort()
-    sent_sorted = [x for y, x in pair]
-    idx = np.random.choice(10, p=[1/55.0,2/55.0,3/55.0,4/55.0,5/55.0,6/55.0,7/55.0,8/55.0,9/55.0,10/55.0])
-    answer = sent_sorted[-10:][idx]
-    return ''.join(answer)
+
     
 
 #related test
@@ -151,21 +114,9 @@ def filter_json(request):
         
     return JsonResponse({'member_list': models, 'mark_list': marks})
 
-def post_msg(request):
-    user_msg = request.POST['inputMsg']
-    seg = jieba.cut(user_msg, cut_all=False)
-    seg2 = " ".join(seg)
-    real_input = filter(lambda x: x in model.wv.vocab, str(seg2).split())
-    if len(real_input) == 0:
-        return HttpResponse("你在說什麼？")
-    else:
-        robot_msg = bot_reply(real_input)
-        return HttpResponse(robot_msg)
 
-def frontend_robot(request,pk):
-    de_member = get_object_or_404(Member, pk=pk)
-    
-    return render(request,'bandongo/frontend_robot.html',{'de_member':de_member,'greeting_msg':greeting_msg,'msg_morning':msg_morning,'msg_noon':msg_noon,'msg_night':msg_night,'msg_midnight':msg_midnight})
+
+
     
 def check_order(request):
     schedule_id = request.POST['schedule_id']

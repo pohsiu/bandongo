@@ -32,7 +32,7 @@ urlpatterns = [
     
     
     
-    url(r'^robot/(?P<pk>[0-9]+)/$', views.frontend_robot, name='frontend_robot'),
+    
     url(r'^detail/(?P<pk>[0-9]+)/$', views.mark_detail, name='frontend_detail'),
     url(r'^log/(?P<pk>[0-9]+)/$',views.member_log, name='frontend_log'),
     url(r'^todayOrder/(?P<pk>[0-9]+)/$',views.today_order, name='frontend_todayOrder'),
@@ -40,7 +40,7 @@ urlpatterns = [
     url(r'^terms/(?P<pk>[0-9]+)/$',views.terms_of_use, name='frontend_terms'),
     url(r'^todayStatistic/(?P<pk>[0-9]+)/$',views.today_statistic, name='frontend_todayStatistic'),
     
-    # url(r'^test/$', views.index_v2),
+    
     url(r'^$', views.index_v2),
     
     url(r'^frontend/delete_food$', views.delete_food),
@@ -50,7 +50,7 @@ urlpatterns = [
     url(r'^frontend/add_feedback$', views.add_feedback),
     url(r'^frontend/add_order$', views.add_order),
     url(r'^frontend/check_order$', views.check_order),
-    url(r'^frontend/post_msg$', views.post_msg),
+    
     
     #form selection json temp html 
     url(r'^mark/json_models' , views.filter_json),
