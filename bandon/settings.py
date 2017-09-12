@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/1.9/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
-
+import key
 import os
 # from django.core.exceptions import ImproperlyConfigured
 # def get_env_variable(var_name):
@@ -35,9 +35,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'oia=nojf+vr8iesh77i44nqfli!(l#5h@v%r3a-$y))z)*4tv9'
-LINE_CHANNEL_ACCESS_TOKEN = 'qho7RfDk/PuWamawJGF4H/Pj/Pt1zpom+R/aAuVYl3pmyzm2zenB9TCNFjwYs5EiJS9JyslG3ivLtMgj8A4Gk7p/yIlsBlKGheKj8QGvKcwQNeG/nPWGYtqxrH+0i1z+WMkoqN+mveWLBadzICGvQwdB04t89/1O/w1cDnyilFU='
-LINE_CHANNEL_SECRET = 'd9ffd21d6bc1e03dd2403c0f555e2e59'
+
+SECRET_KEY = key.SECRET_KEY
+LINE_CHANNEL_ACCESS_TOKEN = key.LINE_CHANNEL_ACCESS_TOKEN
+LINE_CHANNEL_SECRET = key.LINE_CHANNEL_SECRET
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
