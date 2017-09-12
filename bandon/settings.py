@@ -11,15 +11,16 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 try:
     import key
+    print "working"
     LINE_CHANNEL_ACCESS_TOKEN = key.LINE_CHANNEL_ACCESS_TOKEN
     LINE_CHANNEL_SECRET = key.LINE_CHANNEL_SECRET
-    TOEKN = key.TOKEN
+    TOKEN = key.TOKEN
 except:
-    
+    print "exception"
     LINE_CHANNEL_ACCESS_TOKEN = ''
     LINE_CHANNEL_SECRET = ''
-    TOKEN =''
-    
+    TOKEN = ''
+
 import os
 # from django.core.exceptions import ImproperlyConfigured
 # def get_env_variable(var_name):
