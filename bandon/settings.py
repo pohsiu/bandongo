@@ -39,7 +39,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = key.SECRET_KEY
 LINE_CHANNEL_ACCESS_TOKEN = key.LINE_CHANNEL_ACCESS_TOKEN
 LINE_CHANNEL_SECRET = key.LINE_CHANNEL_SECRET
-
+TOEKN = key.TOKEN
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 

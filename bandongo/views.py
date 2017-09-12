@@ -56,17 +56,14 @@ def sendLineRobot(request):
 def sendMsg(msg):
     line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
     users = Member.objects.all()
-    line_bot_api.push_message('Cb7328a260f74e17ab1ff8c1c4c8ef529', TextSendMessage(text=msg))
-    # line_bot_api.push_message('R7eea25b5394b5a2118d07d6cf5382f43', TextSendMessage(text=msg))
+    line_bot_api.push_message(settings.TOKEN, TextSendMessage(text=msg))
+    
     for user in users:
         if user.lineid:
             line_bot_api.push_message(user.lineid, TextSendMessage(text=msg))
     return "ok"
 
-# Create your views here.
-# def userList(request):
-#     users=User.objects.all()
-#     return render(request, 'bandongo/user_list.html', {'users':users})
+
 
 
 def index_v2(request):
@@ -106,8 +103,7 @@ def filter_json(request):
     
     mark_list=Category.objects.all()
     marks = list(mark_list.values())
-    # for i in range(len(marks)):
-    #     marks[i]['index']=i
+    
     models = []
     for mark in mark_list:
         models.append(list(Member.objects.all().filter(remark=mark).values()))
@@ -127,15 +123,8 @@ def check_order(request):
     savings = object_member.saving
     category = object_member.remark.name.encode('utf8')
     
-    # print type(category)
-    if member_id == '42' and savings < 0 :
-        # print '1'
-        return HttpResponse("insufficient")
-    if category != '替代役' and savings < 0:
-        # print '2'
-        return HttpResponse("insufficient")
-    if category == '替代役' and savings < -500:
-        # print '3'
+    
+    if savings < 0:
         return HttpResponse("insufficient")
     if foodorders.exists() and (drinkorders.exists()):
         return HttpResponse("both")
