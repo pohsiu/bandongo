@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 try:
     import key
-    
     LINE_CHANNEL_ACCESS_TOKEN = key.LINE_CHANNEL_ACCESS_TOKEN
     LINE_CHANNEL_SECRET = key.LINE_CHANNEL_SECRET
     TOEKN = key.TOKEN
