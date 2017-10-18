@@ -125,6 +125,7 @@
             </tbody>
         </table>
     	<div style="margin-top: 20px">
+    	    <input type="checkbox" name="notify" value="notify">notify<br>
     	    {% if not schedule.foodArrived %}
                 <button id="foodArrived" class="btn btn-default" onclick="arrive('food');">Food Arrived</button>
             {% endif %}

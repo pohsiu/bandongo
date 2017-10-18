@@ -12,15 +12,28 @@ function finish() {
     );
 }
 
+
 function arrive(type) {
     var id=$("#id").html();
-    $('#'+type+'Arrived').prop("disabled", true);
-    $.post(
-        "/backend/"+type+"Arrive",
-        {id: id},
-        function(response) {
-          alert(response);
-          window.location.href = "/backend/order";
-        }
-    );
+    
+    var notice = $( "input:checked" ).val()
+    console.log(notice);
+    if(notice != "notify"){
+        $('#'+type+'Arrived').prop("disabled", true);
+        console.log("just checked");
+    }
+    else{
+       $('#'+type+'Arrived').prop("disabled", true);
+       console.log("XD");
+       
+        $.post(
+            "/backend/"+type+"Arrive",
+            {id: id},
+            function(response) {
+              alert(response);
+              window.location.href = "/backend/order";
+            }
+        ); 
+    }
+    
 }
