@@ -837,25 +837,31 @@ def finishSchedule(request):
 def foodArrive(request):
     checkExpire()
     schedule=Schedule.objects.get(id=request.POST["id"])
+    notice = request.POST["notice"]
+    print notice
     if not schedule.expire:
         return HttpResponse("The schedule is not expired.")
     else:
         schedule.foodArrived=True
         schedule.save();
-        
-        sendMsg("便當到囉~")
+        if notice == "notify":
+            print "notify!!"
+            sendMsg("便當到囉~")
         return HttpResponse("Bandon arrived.")
     
 def drinkArrive(request):
     checkExpire()
     schedule=Schedule.objects.get(id=request.POST["id"])
+    notice = request.POST["notice"]
+    
     if not schedule.expire:
         return HttpResponse("The schedule is not expired.")
     else:
         schedule.drinkArrived=True
         schedule.save();
-        
-        sendMsg("飲料到囉~")
+        if notice == "notify":
+            print "notify!!"
+            sendMsg("飲料到囉~")
         return HttpResponse("Drink arrived.")
 
 @login_required(login_url='/backend/login/')

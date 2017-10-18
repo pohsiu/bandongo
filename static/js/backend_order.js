@@ -18,9 +18,19 @@ function arrive(type) {
     
     var notice = $( "input:checked" ).val()
     console.log(notice);
-    if(notice != "notify"){
+    
+    if(notice == null){
+        notice = "checkonly";
         $('#'+type+'Arrived').prop("disabled", true);
         console.log("just checked");
+        $.post(
+            "/backend/"+type+"Arrive",
+            {id: id, notice:notice},
+            function(response) {
+              alert(response);
+              window.location.href = "/backend/order";
+            }
+        ); 
     }
     else{
        $('#'+type+'Arrived').prop("disabled", true);
@@ -28,7 +38,7 @@ function arrive(type) {
        
         $.post(
             "/backend/"+type+"Arrive",
-            {id: id},
+            {id: id, notice:notice},
             function(response) {
               alert(response);
               window.location.href = "/backend/order";
