@@ -70,10 +70,10 @@ def callback(request):
                                     event.reply_token,
                                     TextSendMessage(text='註冊成功，現在可以接收到最新消息囉^^')
                                 )
-                        elif(inputMsg == '文裕是不是白癡'.decode('utf-8')):
+                        elif(inputMsg == '你是什麼東西'.decode('utf-8')):
                             line_bot_api.reply_message(
                                 event.reply_token,
-                                TextSendMessage(text="幹 馬子狗")
+                                TextSendMessage(text="我是機器人啊")
                             )
                         else:
                             print "userfail"
