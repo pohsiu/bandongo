@@ -1,0 +1,1 @@
+web: gunicorn bandon.wsgi --log-file
