@@ -4,7 +4,8 @@ from models import Member, Savelog, Food, Drink, Schedule, Catalog, FoodOrder, D
 from models import Category, WishFood, WishDrink, Notification
 
 from .forms import MemberForm, PicForm, CatalogForm, FoodForm, DrinkForm, DepartmentForm
-from django.shortcuts import render_to_response, RequestContext
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 
