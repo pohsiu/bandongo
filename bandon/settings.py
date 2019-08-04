@@ -35,7 +35,7 @@ SECRET_KEY = '9=wh8rs49$(85p$yo-ll0td6mt4dl(vrz9rl2c1&w!-i=0-j%0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['8f7d0f5d.ngrok.io']
 
 
 # Application definition
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bandongo',
+    'echobot',
 ]
 
 MIDDLEWARE = [

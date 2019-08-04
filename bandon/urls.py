@@ -14,10 +14,10 @@ Including another URLconf
     2. Import the include() function: from django.conf.urls import url, include
     3. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from bandongo import views
-# import echobot
+import echobot
 # from pratest import views2
 
 
@@ -27,7 +27,7 @@ urlpatterns = [
     # url(r'^user_list/', views.userList, name='home'),
     
     
-    # url(r'^echobot/', include('echobot.urls')),
+    url(r'^echobot/', include('echobot.urls')),
    
     
     

@@ -58,10 +58,10 @@ def sendMsg(msg):
     line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
     users = Member.objects.all()
     line_bot_api.push_message(settings.TOKEN, TextSendMessage(text=msg))
-    
-    for user in users:
-        if user.lineid:
-            line_bot_api.push_message(user.lineid, TextSendMessage(text=msg))
+    line_bot_api.push_message('U2b76d9b94e8298a1ed591554d781d192', TextSendMessage(text=msg))
+    # for user in users:
+    #     if user.lineid:
+    #         line_bot_api.push_message(user.lineid, TextSendMessage(text=msg))
     return "ok"
 
 
