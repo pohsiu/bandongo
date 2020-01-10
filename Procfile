@@ -1,0 +1,1 @@
+echo "web: gunicorn bandongo.wsgi" >> Procfile
