@@ -20,7 +20,7 @@ class Member(models.Model):
     #password = models.CharField(max_length=50)
     phone = models.CharField(max_length=15)
     email = models.EmailField(blank=True, verbose_name='e-mail')
-    remark = models.ForeignKey(Category)
+    remark = models.ForeignKey(Category, on_delete=models.CASCADE)
     auth = models.CharField(max_length=10, default='normal')
     saving = models.IntegerField(default=0)
     lineid = models.CharField(max_length=100, default='')
@@ -34,7 +34,7 @@ class Member(models.Model):
     
 #Saving record
 class Savelog(models.Model):
-    memberName = models.ForeignKey(Member, related_name='person') # not sure can operate
+    memberName = models.ForeignKey(Member, related_name='person', on_delete=models.CASCADE) # not sure can operate
     money = models.IntegerField()
     tranDate = models.DateTimeField(default=timezone.now)
     adminName = models.ForeignKey(Member, default=None, related_name='admin', null=True, on_delete=models.SET_NULL,)
@@ -67,7 +67,7 @@ class Drink(models.Model):
 
 #Product Food Menu
 class Catalog(models.Model):
-    foodShop = models.ForeignKey(Food)
+    foodShop = models.ForeignKey(Food, on_delete=models.CASCADE)
     name = models.CharField(max_length=15)
     pic = models.ImageField(upload_to="static/pic/catalogPic/",blank=True)
     price = models.IntegerField()
@@ -80,9 +80,9 @@ class Catalog(models.Model):
 class Schedule(models.Model):
     name = models.CharField(max_length=50)
     comment = models.CharField(max_length=50, blank=True)
-    food = models.ForeignKey(Food)
+    food = models.ForeignKey(Food, on_delete=models.CASCADE)
     catalogs = models.ManyToManyField(Catalog)
-    drink = models.ForeignKey(Drink, blank=True)
+    drink = models.ForeignKey(Drink, blank=True, on_delete=models.CASCADE)
     date = models.DateTimeField() 
     expire = models.BooleanField(default=False)
     foodArrived = models.BooleanField(default=False)
@@ -94,9 +94,9 @@ class Schedule(models.Model):
 
 #Transaction log
 class FoodOrder(models.Model):
-    memberName = models.ForeignKey(Member)
-    scheduleName = models.ForeignKey(Schedule)
-    foodName = models.ForeignKey(Catalog)
+    memberName = models.ForeignKey(Member, on_delete=models.CASCADE)
+    scheduleName = models.ForeignKey(Schedule, on_delete=models.CASCADE)
+    foodName = models.ForeignKey(Catalog, on_delete=models.CASCADE)
     num = models.IntegerField(default=1) #single product ordering num 
     date = models.DateTimeField(default=timezone.now)
     remark = models.CharField(max_length=20,blank=True)
@@ -109,8 +109,8 @@ class FoodOrder(models.Model):
         return u'%s '% (self.memberName)
 
 class DrinkOrder(models.Model):
-    memberName = models.ForeignKey(Member)
-    scheduleName = models.ForeignKey(Schedule)
+    memberName = models.ForeignKey(Member, on_delete=models.CASCADE)
+    scheduleName = models.ForeignKey(Schedule, on_delete=models.CASCADE)
     drinking = models.CharField(max_length=15)
     num = models.IntegerField(default=1) #single product ordering num 
     date = models.DateTimeField(default=timezone.now)
@@ -128,7 +128,7 @@ class Notification(models.Model):
     classification = models.IntegerField()
     # 1: no savings
     # 2: messages
-    subject = models.ForeignKey(Member)
+    subject = models.ForeignKey(Member, on_delete=models.CASCADE)
     content = models.CharField(max_length=50)
     date = models.DateTimeField(default=timezone.now)
     read = models.BooleanField(default=False)
@@ -152,16 +152,16 @@ class Message(models.Model):
         
 
 class WishFood(models.Model):
-    member = models.ForeignKey(Member)
-    food = models.ForeignKey(Food)
+    member = models.ForeignKey(Member, on_delete=models.CASCADE)
+    food = models.ForeignKey(Food, on_delete=models.CASCADE)
     date = models.DateField(default=timezone.now)
     realized = models.BooleanField(default=False)
     def __unicode__(self):
         return u'%s '% (self.food)
     
 class WishDrink(models.Model):
-    member = models.ForeignKey(Member)
-    drink = models.ForeignKey(Drink)
+    member = models.ForeignKey(Member, on_delete=models.CASCADE)
+    drink = models.ForeignKey(Drink, on_delete=models.CASCADE)
     date = models.DateField(default=timezone.now)
     realized = models.BooleanField(default=False)
     def __unicode__(self):

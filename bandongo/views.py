@@ -1,7 +1,7 @@
 # coding=UTF8
 from django.shortcuts import render, get_object_or_404
-from models import Member, Savelog, Food, Drink, Schedule, Catalog, FoodOrder, DrinkOrder, Message
-from models import Category, WishFood, WishDrink, Notification
+from .models import Member, Savelog, Food, Drink, Schedule, Catalog, FoodOrder, DrinkOrder, Message
+from .models import Category, WishFood, WishDrink, Notification
 
 from .forms import MemberForm, PicForm, CatalogForm, FoodForm, DrinkForm, DepartmentForm
 from django.shortcuts import render_to_response
@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.http import JsonResponse
 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.shortcuts import redirect
 
 from django.db.models import Sum, Count
@@ -139,7 +139,7 @@ def check_order(request):
 def add_order(request):
     checkExpire()
     foodJson=json.loads(request.POST["foodJson"])
-    # print foodJson
+    # print(foodJson)
     now = datetime.now()
     schedule = Schedule.objects.get(id=request.POST['schedule_id'])
     member = Member.objects.get(id=request.POST['member_id'])
@@ -155,7 +155,7 @@ def add_order(request):
                 FoodOrder.objects.create(memberName=member, scheduleName=schedule, foodName=catalog, num=num, date=now, price=count)
         
         if request.POST.get('drinkname'):
-            print "working"
+            print("working")
             drink = request.POST['drinkname']
             remark = request.POST['sugar']+request.POST['ice']+request.POST['drinkcomment']
             price = request.POST['drinkprice']
@@ -425,7 +425,7 @@ def homePage(request):
     return render(request, 'bandongo/backend_home.html',{'balance': sum(map(lambda member: member.saving, members)), 'notifications': notifications})
 
 def login(request):
-    if request.user.is_authenticated(): 
+    if request.user.is_authenticated: 
         return HttpResponseRedirect('/backend')
 
     username = request.POST.get('username', '')
@@ -481,7 +481,7 @@ def editSchedulePage(request):
         nonFinish[0].date=nonFinish[0].date.strftime("%Y-%m-%dT%H:%M")
         return render(request, 'bandongo/backend_editSchedule.html',{'schedule': nonFinish[0], 'shops':shops, 'catalogs': catalogs, 'drinks':drinks})
     else:
-        print "bugbugbugbug"
+        print("bugbugbugbug")
 
 @login_required(login_url='/backend/login/')
 def scheduleListPage(request, page):
@@ -492,7 +492,7 @@ def scheduleListPage(request, page):
     for i in range(len(schedules)/10+1):
         pages.append(i+1)
     if page*10-10>len(schedules):
-        print "page error"
+        print("page error")
     elif page*10>len(schedules) and len(schedules)>page*10-10:
         return render(request, 'bandongo/backend_scheduleList.html',{'schedules': schedules[page*10-10:], 'pages': pages, 'curPage': page})
     else:
@@ -720,7 +720,7 @@ def savelogPage(request, page):
     for i in range(len(savelogs)/rowNum+1):
         pages.append(i+1)
     if page*rowNum-rowNum>len(savelogs):
-        print "page error"
+        print("page error")
     elif page*rowNum>len(savelogs) and len(savelogs)>page*rowNum-rowNum:
         return render(request, 'bandongo/backend_savelog.html',{'logs': savelogs[page*rowNum-rowNum:], 'pages': pages, 'curPage': page})
     else:
@@ -751,7 +751,7 @@ def notificationPage(request, page):
     for i in range(len(nots)/10+1):
         pages.append(i+1)
     if page*10-10>len(nots):
-        print "page error"
+        print("page error")
     elif page*10>len(nots) and len(nots)>page*10-10:
         return render(request, 'bandongo/backend_notification.html',{'nots': nots[page*10-10:], 'pages': pages, 'curPage': page})
     else:
@@ -839,14 +839,14 @@ def foodArrive(request):
     checkExpire()
     schedule=Schedule.objects.get(id=request.POST["id"])
     notice = request.POST["notice"]
-    print notice
+    print(notice)
     if not schedule.expire:
         return HttpResponse("The schedule is not expired.")
     else:
         schedule.foodArrived=True
         schedule.save();
         if notice == "notify":
-            print "notify!!"
+            print("notify!!")
             sendMsg("便當到囉~")
         return HttpResponse("Bandon arrived.")
     
@@ -861,7 +861,7 @@ def drinkArrive(request):
         schedule.drinkArrived=True
         schedule.save();
         if notice == "notify":
-            print "notify!!"
+            print("notify!!")
             sendMsg("飲料到囉~")
         return HttpResponse("Drink arrived.")
 
@@ -1039,9 +1039,9 @@ def setMessage(request):
     m=Message.objects.get(id=request.POST["message"])
     m.content=request.POST["content"]
     m.save()
-    print m
-    print m.content
-    print request.POST["content"]
+    print(m)
+    print(m.content)
+    print(request.POST["content"])
     return HttpResponse("Set message successfully.")
 
 @login_required(login_url='/backend/login/')

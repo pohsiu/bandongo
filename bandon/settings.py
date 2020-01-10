@@ -13,12 +13,12 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 try:
     import key
-    print "working"
+    print("working")
     LINE_CHANNEL_ACCESS_TOKEN = key.LINE_CHANNEL_ACCESS_TOKEN
     LINE_CHANNEL_SECRET = key.LINE_CHANNEL_SECRET
     TOKEN = key.TOKEN
 except:
-    print "exception"
+    print("exception")
     LINE_CHANNEL_ACCESS_TOKEN = ''
     LINE_CHANNEL_SECRET = ''
     TOKEN = ''
@@ -35,7 +35,7 @@ SECRET_KEY = '9=wh8rs49$(85p$yo-ll0td6mt4dl(vrz9rl2c1&w!-i=0-j%0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8f7d0f5d.ngrok.io']
+ALLOWED_HOSTS = ['8f7d0f5d.ngrok.io', '127.0.0.1']
 
 
 # Application definition

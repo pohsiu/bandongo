@@ -468,7 +468,7 @@ def homePage(request):
     return render(request, 'bandongo/backend_home.html',{'balance': sum(map(lambda member: member.saving, members)), 'notifications': notifications})
 
 def login(request):
-    if request.user.is_authenticated(): 
+    if request.user.is_authenticated: 
         return HttpResponseRedirect('/backend')
 
     username = request.POST.get('username', '')

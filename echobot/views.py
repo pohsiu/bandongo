@@ -37,7 +37,7 @@ def callback(request):
             if isinstance(event, MessageEvent):
                 if isinstance(event.message, TextMessage):
                     if(str(event.source.type) == 'user'):
-                        print type(event.message.text)
+                        print(type(event.message.text))
                          
                         inputMsg = event.message.text
                         head = inputMsg[:4]
@@ -48,16 +48,16 @@ def callback(request):
                             combineName = inputMsg[6:len(inputMsg)]
                             allusers = Member.objects.all()
                             lock = False
-                            print combineName
+                            print(combineName)
                             for each in allusers:
                             	each_combine = each.remark.name+each.name
-                            # 	print each_combine
+                            # 	print(each_combine)
                             	if(each_combine == combineName):
                             		lock = True
                             		target = Member.objects.get(id=each.id)
                             		target.lineid = str(event.source.user_id)
                             		target.save()
-                            		print "成功"
+                            		print("成功")
                             		break
                             
                             if(lock is False):
@@ -76,16 +76,16 @@ def callback(request):
                                 TextSendMessage(text="我是機器人啊")
                             )
                         else:
-                            print "userfail"
-                            print event.reply_token
+                            print("userfail")
+                            print(event.reply_token)
                             line_bot_api.reply_message(
                                 event.reply_token,
                                 TextSendMessage(text="系統不會回復您任何訊息哦=)")
                             )
                     else:
-                        # print event.source.room_id
-                        # print event.source.group_id
-                        print "fail"
+                        # print(event.source.room_id)
+                        # print(event.source.group_id)
+                        print("fail")
                         
                     
 

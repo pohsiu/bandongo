@@ -1,5 +1,5 @@
 from django import forms
-from models import Member, Catalog, Food, Drink, Category
+from .models import Member, Catalog, Food, Drink, Category
 class MemberForm(forms.ModelForm):
     class Meta:
         model = Member
