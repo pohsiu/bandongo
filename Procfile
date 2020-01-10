@@ -1,1 +1,1 @@
-web: gunicorn bandongo.wsgi
+web: gunicorn bandon.wsgi
