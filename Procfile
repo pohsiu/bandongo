@@ -1,1 +1,1 @@
-echo "web: gunicorn bandongo.wsgi" >> Procfile
+web: gunicorn bandongo.wsgi
